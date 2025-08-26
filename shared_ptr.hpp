@@ -32,11 +32,7 @@ public:
         obj.mp_obj = nullptr;
         obj.mp_count = nullptr;
     }
-    
-    bool empty() const noexcept {
-        return mp_obj == nullptr;
-    }
-    
+        
     ~shared_ptr() noexcept {
         if(empty())
             return;
@@ -50,6 +46,35 @@ public:
         }
     }
     
+    bool empty() const noexcept {
+        return mp_obj == nullptr;
+    }
+    
+    size_t ref_count() const noexcept {
+        return mp_count ? *mp_count : 0;
+    }
+    
+    void reset(T* p_obj = nullptr) {
+        if(p_obj == mp_obj)
+            return;
+        
+        if(!empty()) {
+            (*mp_count)--;
+            if((*mp_count) == 0) {
+                delete mp_obj;
+                delete mp_count;
+                mp_obj = nullptr;
+                mp_count = nullptr;
+            }
+        }
+        
+        mp_obj = p_obj;
+        mp_count = nullptr;
+        
+        if(mp_obj)
+            mp_count = new size_t(1);
+    }
+
 private:
     T* mp_obj;
     size_t* mp_count;
