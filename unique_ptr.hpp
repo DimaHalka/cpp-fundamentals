@@ -26,8 +26,10 @@ public:
     }
 
     unique_ptr& operator=(T* ptr) {
-        reset();
-        m_ptr = ptr;
+        if(m_ptr != ptr) {
+            reset();
+            m_ptr = ptr;
+        }
         return *this;
     }
     
