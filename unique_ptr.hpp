@@ -52,6 +52,11 @@ public:
         m_ptr = nullptr;
     }
     
+    T* release() noexcept {
+        T* ptr = m_ptr;
+        m_ptr = nullptr;
+        return ptr;
+    }
     
 
 private:

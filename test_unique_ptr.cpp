@@ -31,3 +31,11 @@ TEST(unique_ptr, move_ctor) {
     EXPECT_EQ(uptr1.get(), nullptr);
     EXPECT_EQ(*uptr2.get(), 42);
 }
+
+TEST(unique_ptr, release) {
+    unique_ptr<int> uptr1(new int(42));
+    int* p_int = uptr1.release();
+    EXPECT_EQ(uptr1.get(), nullptr);
+    EXPECT_EQ(*p_int, 42);
+    delete p_int;
+}
