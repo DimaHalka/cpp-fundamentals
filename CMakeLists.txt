@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Library data_structures
 add_library(cpp-fundamentals INTERFACE
-    shared_ptr.hpp
+    unique_ptr.hpp
 )
 
 # GoogleTest 
@@ -23,7 +23,7 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 enable_testing()
 add_executable(unit_tests
-    test_shared_ptr.cpp
+    test_unique_ptr.cpp
 )
 target_link_libraries(unit_tests
     GTest::gtest_main
