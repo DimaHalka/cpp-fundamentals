@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(cpp-fundamentals INTERFACE
     unique_ptr.hpp
+    shared_ptr.hpp
 )
 
 add_library(cpp-fundamentals-code
@@ -28,6 +29,7 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 add_executable(unit_tests
     test_unique_ptr.cpp
+    test_shared_ptr.cpp
     test_factory.cpp
 )
 target_link_libraries(unit_tests
