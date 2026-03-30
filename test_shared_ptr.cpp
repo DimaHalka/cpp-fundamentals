@@ -16,7 +16,7 @@ namespace {
 TEST(shared_ptr, ctor_default) {
   shared_ptr<char> ptr;
 
-  EXPECT_EQ(ptr.data(), nullptr);
+  EXPECT_EQ(ptr.get(), nullptr);
   EXPECT_EQ(ptr.ref_count(), 0);
 }
 
@@ -26,7 +26,7 @@ TEST(shared_ptr, ctor_ptr) {
 
   shared_ptr<char> ptr(c);
 
-  EXPECT_EQ(ptr.data(), c);
+  EXPECT_EQ(ptr.get(), c);
   EXPECT_EQ(ptr.ref_count(), 1);
 }
 
@@ -36,7 +36,7 @@ TEST(shared_ptr, dtor) {
 
   {
     shared_ptr<destruction_observer> ptr(h);
-    EXPECT_EQ(ptr.data(), h);
+    EXPECT_EQ(ptr.get(), h);
   }
 
   EXPECT_TRUE(destruction_happened);
