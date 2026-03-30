@@ -55,3 +55,36 @@ TEST(shared_ptr, copy_ctor) {
   delete p_ptr2;
   EXPECT_TRUE(destruction_happened);
 }
+
+TEST(shared_ptr, empty) {
+  shared_ptr<char> ptr1;
+  EXPECT_TRUE(ptr1.empty());
+
+  shared_ptr<char> ptr2(nullptr);
+  EXPECT_TRUE(ptr2.empty());
+
+  shared_ptr<char> ptr3(new char(42));
+  EXPECT_FALSE(ptr3.empty());
+}
+
+TEST(shared_ptr, op_bool) {
+  shared_ptr<char> ptr1;
+  EXPECT_FALSE(ptr1);
+
+  shared_ptr<char> ptr2(nullptr);
+  EXPECT_FALSE(ptr2);
+
+  shared_ptr<char> ptr3(new char(42));
+  EXPECT_TRUE(ptr3);
+}
+
+TEST(shared_ptr, op_log_not) {
+  shared_ptr<char> ptr1;
+  EXPECT_TRUE(!ptr1);
+
+  shared_ptr<char> ptr2(nullptr);
+  EXPECT_TRUE(!ptr2);
+
+  shared_ptr<char> ptr3(new char(42));
+  EXPECT_FALSE(!ptr3);
+}

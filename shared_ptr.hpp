@@ -48,12 +48,24 @@ public:
     return mp_data;
   }
 
-  const T* get() const noexcept {
+  T* get() const noexcept {
     return mp_data;
   }
 
   size_t ref_count() const noexcept {
     return mp_ref_count ? *mp_ref_count : 0;
+  }
+
+  bool empty() const noexcept {
+    return mp_ref_count == nullptr;
+  }
+
+  operator bool() const noexcept {
+    return !empty();
+  }
+
+  bool operator!() const noexcept {
+    return empty();
   }
 
 private:
